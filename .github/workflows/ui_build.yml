@@ -23,7 +23,7 @@ jobs:
     - name: Install Dependencies
       run: |
         cd ui_src
-        npm install
+        npm ci
 
     - name: Clear Previous Build
       run: |
