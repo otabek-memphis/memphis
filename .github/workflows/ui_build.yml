@@ -32,7 +32,7 @@ jobs:
     - name: Build
       run: |
         cd ui_src
-        npm run build
+        npm run ci-build
 
     - name: Commit and Push Changes
       run: |
