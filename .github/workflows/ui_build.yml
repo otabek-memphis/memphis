@@ -75,6 +75,7 @@ jobs:
           pr_body: "Automated UI build for commit ${{ github.sha }}"
           destination_branch: "master"
           source_branch: "ui-build-files-${{ github.run_id }}"
+          pr_assignee: "muhammadyusuf-kurbonov"
 
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
