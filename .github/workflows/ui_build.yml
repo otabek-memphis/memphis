@@ -40,6 +40,8 @@ jobs:
           git config --global user.email 'team@memphis.dev'
         git add ./ui_static_files/build/*
         git commit -m "Build UI Static Files" -a || echo "No changes to commit"
+        git fetch origin staging
+        git rebase origin/staging
         git push origin HEAD:staging
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
