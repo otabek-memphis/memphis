@@ -44,6 +44,18 @@ jobs:
         run: |
           git checkout -b ui-build-files-${{ github.run_id }}
 
+      - name: List Root Directory
+        run: |
+          pwd
+
+      - name: List Root Directory Contents
+        run: |
+          ls -l ./
+
+      - name: List Build Directory Contents
+        run: |
+          ls -l ./ui_static_files/
+
       - name: Commit Changes
         run: |
           git config --global user.name 'teammemphis'
