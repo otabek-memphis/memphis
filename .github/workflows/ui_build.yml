@@ -60,7 +60,7 @@ jobs:
         run: |
           git config --global user.name 'teammemphis'
           git config --global user.email 'team@memphis.dev'
-          git add ./ui_static_files/build/*
+          git add .
           git commit -m "Build UI Static Files" -a || echo "No changes to commit"
 
       - name: Push Changes
