@@ -47,14 +47,14 @@ jobs:
           rm -rf ./ui_static_files/build/*
           ls -la ./ui_static_files/build/
 
-      - name: List Root Directory Contents
-        run: |
-          ls -la ./ui_static_files/build/
-
       - name: Build
         run: |
           cd ui_src
           npm run ci-build
+
+      - name: List Root Directory Contents
+        run: |
+          ls -la ./ui_static_files/build/
 
       - name: Commit Changes
         run: |
