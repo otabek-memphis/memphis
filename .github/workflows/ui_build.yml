@@ -3,7 +3,7 @@ name: UI Build and Commit
 on:
   push:
     branches:
-      - master
+      - staging
     paths:
       - 'ui_src/**'
 
