@@ -63,4 +63,4 @@ jobs:
           pr_body: "Automated UI build for commit ${{ github.sha }}"
           destination_branch: "master"
           source_branch: "ui-update-${{ github.run_id }}"
-          pr_assignees: "idanasulinmemphis"
+          pr_assignee: "idanasulinmemphis"
