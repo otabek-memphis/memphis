@@ -68,7 +68,7 @@ if (!isCloud()) {
     Login = require('./domain/login').default;
     Signup = require('./domain/signup').default;
 
-    console.log(SysLogs)
+    console.log(SysLogs+ '1')
 }
 
 const App = withRouter(() => {
