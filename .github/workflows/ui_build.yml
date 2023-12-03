@@ -42,7 +42,7 @@ jobs:
 
       - name: Create New Branch
         run: |
-          git checkout -b ui-update-${{ github.run_id }}
+          git checkout -b ui-build-files-${{ github.run_id }}
 
       - name: Commit Changes
         run: |
@@ -53,7 +53,7 @@ jobs:
 
       - name: Push Changes
         run: |
-          git push origin ui-update-${{ github.run_id }}
+          git push origin ui-build-files-${{ github.run_id }}
 
       - name: Create Pull Request
         uses: repo-sync/pull-request@v2
@@ -62,5 +62,5 @@ jobs:
           pr_title: "Build UI Static Files"
           pr_body: "Automated UI build for commit ${{ github.sha }}"
           destination_branch: "master"
-          source_branch: "ui-update-${{ github.run_id }}"
+          source_branch: "ui-build-files-${{ github.run_id }}"
           pr_assignee: "idanasulinmemphis"
