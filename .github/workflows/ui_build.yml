@@ -38,7 +38,7 @@ jobs:
     - name: Build
       run: |
         cd ui_src
-        GENERATE_SOURCEMAP=false npm run ci-build
+        GENERATE_SOURCEMAP=false BUILD_PATH='./../ui_static_files/build' npm run ci-build
 
     - name: Commit and Push Changes
       run: |
