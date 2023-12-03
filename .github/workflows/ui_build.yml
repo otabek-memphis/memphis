@@ -3,7 +3,7 @@ name: UI Build and Commit
 on:
   push:
     branches:
-      - staging
+      - master
     paths:
       - 'ui_src/**'
 
@@ -17,9 +17,9 @@ jobs:
 
     - name: Fetch Latest Staging
       run: |
-        git fetch origin staging
-        git checkout staging
-        git reset --hard origin/staging
+        git fetch origin master
+        git checkout master
+        git reset --hard origin/master
 
     - name: Set up Node.js
       uses: actions/setup-node@v3
@@ -46,6 +46,6 @@ jobs:
         git config --global user.email 'team@memphis.dev'
         git add ./ui_static_files/build/*
         git commit -m "Build UI Static Files" -a || echo "No changes to commit"
-        git push --force-with-lease origin staging
+        git push --force-with-lease origin master
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
