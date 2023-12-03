@@ -26,41 +26,30 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install Dependencies
-        run: |
-          cd ui_src
-          npm ci
+#      - name: Install Dependencies
+#        run: |
+#          cd ui_src
+#          npm ci
+
+      - name: Print Current Working Directory
+        run: pwd
 
       - name: Clear Previous Build
         run: |
+          ls -la ./../ui_static_files/build/
           rm -rf ./../ui_static_files/build/*
+          ls -la ./../ui_static_files/build/
 
-      - name: Build
-        run: |
-          cd ui_src
-          npm run ci-build
-
-      - name: Create New Branch
-        run: |
-          git checkout -b ui-build-files-${{ github.run_id }}
-
-      - name: List Root Directory
-        run: |
-          pwd
-
-      - name: List Root Directory Contents
-        run: |
-          ls -l ./
-
-      - name: List Build Directory Contents
-        run: |
-          ls -l ./ui_static_files/
+#      - name: Build
+#        run: |
+#          cd ui_src
+#          npm run ci-build
 
       - name: Commit Changes
         run: |
           git config --global user.name 'teammemphis'
           git config --global user.email 'team@memphis.dev'
-          git add .
+          git add ./ui_static_files/build/*
           git commit -m "Build UI Static Files" -a || echo "No changes to commit"
 
       - name: Push Changes
