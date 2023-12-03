@@ -37,10 +37,18 @@ jobs:
       - name: Print Current Working Directory
         run: ls -la
 
+      - name: Create New Branch
+        run: |
+          git checkout -b ui-build-files-${{ github.run_id }}
+
       - name: Clear Previous Build
         run: |
           ls -la ./ui_static_files/build/
           rm -rf ./ui_static_files/build/*
+          ls -la ./ui_static_files/build/
+
+      - name: List Root Directory Contents
+        run: |
           ls -la ./ui_static_files/build/
 
       - name: Build
@@ -48,19 +56,11 @@ jobs:
           cd ui_src
           npm run ci-build
 
-      - name: Create New Branch
-        run: |
-          git checkout -b ui-build-files-${{ github.run_id }}
-
-      - name: List Root Directory Contents
-        run: |
-          ls -la ./ui_static_files/build/
-
       - name: Commit Changes
         run: |
           git config --global user.name 'teammemphis'
           git config --global user.email 'team@memphis.dev'
-          git add .
+          git add ./ui_static_files/build/*
           git commit -m "Build UI Static Files" -a || echo "No changes to commit"
 
       - name: Push Changes
