@@ -48,17 +48,21 @@ jobs:
           npm run ci-build
 
       - name: Commit Changes
+        id: commit
         run: |
           git config --global user.name 'teammemphis'
           git config --global user.email 'team@memphis.dev'
           git add ./ui_static_files/build/*
           git commit -m "Build UI Static Files" -a || echo "No changes to commit"
+          echo "COMMIT_STATUS=$?" >> $GITHUB_ENV
 
       - name: Push Changes
+        if: env.COMMIT_STATUS == 0
         run: |
           git push origin ui-build-files-${{ github.run_id }}
 
       - name: Create Pull Request
+        if: env.COMMIT_STATUS == 0
         uses: repo-sync/pull-request@v2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
