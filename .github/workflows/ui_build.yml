@@ -48,6 +48,10 @@ jobs:
           cd ui_src
           npm run ci-build
 
+      - name: Build files directory
+        run: |
+          ls -la ./ui_static_files/build/
+
       - name: Commit Changes
         run: |
           git config --global user.name 'teammemphis'
