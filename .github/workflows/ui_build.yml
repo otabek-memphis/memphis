@@ -12,40 +12,55 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v3
+      - name: Checkout Repository
+        uses: actions/checkout@v3
 
-    - name: Fetch Latest Staging
-      run: |
-        git fetch origin master
-        git checkout master
-        git reset --hard origin/master
+      - name: Fetch Latest Staging
+        run: |
+          git fetch origin master
+          git checkout master
+          git reset --hard origin/master
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
 
-    - name: Install Dependencies
-      run: |
-        cd ui_src
-        npm ci
+      - name: Install Dependencies
+        run: |
+          cd ui_src
+          npm ci
 
-    - name: Clear Previous Build
-      run: |
-        rm -rf ./../ui_static_files/build/*
+      - name: Clear Previous Build
+        run: |
+          rm -rf ./../ui_static_files/build/*
 
-    - name: Build
-      run: |
-        cd ui_src
-        GENERATE_SOURCEMAP=false BUILD_PATH='./../ui_static_files/build' npm run ci-build
+      - name: Build
+        run: |
+          cd ui_src
+          npm run ci-build
 
-    - name: Commit and Push Changes
-      run: |
-        git config --global user.name 'teammemphis'
-        git config --global user.email 'team@memphis.dev'
-        git add ./ui_static_files/build/*
-        git commit -m "Build UI Static Files" -a || echo "No changes to commit"
-        git push --force-with-lease origin master
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create New Branch
+        run: |
+          git checkout -b ui-update-${{ github.run_id }}
+
+      - name: Commit Changes
+        run: |
+          git config --global user.name 'teammemphis'
+          git config --global user.email 'team@memphis.dev'
+          git add ./ui_static_files/build/*
+          git commit -m "Build UI Static Files" -a || echo "No changes to commit"
+
+      - name: Push Changes
+        run: |
+          git push origin ui-update-${{ github.run_id }}
+
+      - name: Create Pull Request
+        uses: repo-sync/pull-request@v2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          pr_title: "Build UI Static Files"
+          pr_body: "Automated UI build for commit ${{ github.sha }}"
+          destination_branch: "master"
+          source_branch: "ui-update-${{ github.run_id }}"
+          pr_assignees: "idanasulinmemphis"
