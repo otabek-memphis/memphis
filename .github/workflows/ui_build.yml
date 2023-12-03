@@ -48,7 +48,11 @@ jobs:
           cd ui_src
           npm run ci-build
 
-      - name: Build files directory
+      - name: Create New Branch
+        run: |
+          git checkout -b ui-build-files-${{ github.run_id }}
+
+      - name: List Root Directory Contents
         run: |
           ls -la ./ui_static_files/build/
 
