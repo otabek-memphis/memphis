@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - master
-    paths:
-      - 'ui_src/**'
+#    paths:
+#      - 'ui_src/**'
 
 jobs:
   build-and-commit:
