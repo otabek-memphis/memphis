@@ -32,12 +32,12 @@ jobs:
     - name: Build
       run: |
         cd ui_src
-        npm run ci-build
+        GENERATE_SOURCEMAP=false BUILD_PATH='./../ui_static_files/build' npm run ci-build
 
     - name: Commit and Push Changes
       run: |
-        git config --global user.name 'otabek-memphis'
-        git config --global user.email 'otabek@memphis.dev'
+        git config --global user.name 'teammemphis'
+          git config --global user.email 'team@memphis.dev'
         git add ./ui_static_files/build/*
         git commit -m "Build UI Static Files" -a || echo "No changes to commit"
         git push origin HEAD:staging
