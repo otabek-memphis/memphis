@@ -10,15 +10,12 @@ on:
 jobs:
   build-and-commit:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Fetch Latest Staging
+      - name: Fetch Latest Master
         run: |
           git fetch origin master
           git checkout master
@@ -38,31 +35,27 @@ jobs:
         run: |
           rm -rf ./../ui_static_files/build/*
 
-      - name: Create New Branch
-        run: |
-          git checkout -b ui-build-files-${{ github.run_id }}
-
       - name: Build
         run: |
           cd ui_src
           npm run ci-build
 
+      - name: Create New Branch
+        run: |
+          git checkout -b ui-build-files-${{ github.run_id }}
+
       - name: Commit Changes
-        id: commit
         run: |
           git config --global user.name 'teammemphis'
           git config --global user.email 'team@memphis.dev'
           git add ./ui_static_files/build/*
           git commit -m "Build UI Static Files" -a || echo "No changes to commit"
-          echo "COMMIT_STATUS=$?" >> $GITHUB_ENV
 
       - name: Push Changes
-        if: env.COMMIT_STATUS == 0
         run: |
           git push origin ui-build-files-${{ github.run_id }}
 
       - name: Create Pull Request
-        if: env.COMMIT_STATUS == 0
         uses: repo-sync/pull-request@v2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -71,3 +64,6 @@ jobs:
           destination_branch: "master"
           source_branch: "ui-build-files-${{ github.run_id }}"
           pr_assignee: "idanasulinmemphis"
+
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
