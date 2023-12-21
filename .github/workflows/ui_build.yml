@@ -1,4 +1,4 @@
-name: UI Build and Commit
+name: UI Build and Create PR
 
 on:
   push:
@@ -29,12 +29,12 @@ jobs:
       - name: Install Dependencies
         run: |
           cd ui_src
-          npm ci
+          npm i
 
-      - name: Print Current Working Directory
+      - name: Print Current Working Directory Path
         run: pwd
 
-      - name: Print Current Working Directory
+      - name: Print Current Working Directory List
         run: ls -la
 
       - name: Create New Branch
@@ -75,7 +75,7 @@ jobs:
           pr_body: "Automated UI build for commit ${{ github.sha }}"
           destination_branch: "master"
           source_branch: "ui-build-files-${{ github.run_id }}"
-          pr_assignee: "muhammadyusuf-kurbonov"
+          #pr_assignee: "idanasulinmemphis"
 
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
