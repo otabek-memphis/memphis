@@ -68,7 +68,7 @@ jobs:
           git push origin ui-build-files-${{ github.run_id }}
 
       - name: Create Pull Request
-        uses: repo-sync/pull-request@v3
+        uses: repo-sync/pull-request@v2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           pr_title: "Build UI Static Files"
