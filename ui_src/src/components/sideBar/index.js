@@ -19,7 +19,7 @@ import PersonOutlinedIcon from '@material-ui/icons/PersonOutlined';
 import { BsFillChatSquareTextFill } from 'react-icons/bs';
 import { useHistory } from 'react-router-dom';
 import { Divider, Popover } from 'antd';
-import CloudMoadl from '../cloudModal';
+import CloudMoadl from 'components/cloudModal';
 import {
     LOCAL_STORAGE_ACCOUNT_NAME,
     LOCAL_STORAGE_AVATAR_ID,
@@ -28,50 +28,50 @@ import {
     LOCAL_STORAGE_USER_NAME,
     LOCAL_STORAGE_SKIP_GET_STARTED,
     USER_IMAGE
-} from '../../const/localStorageConsts';
-import { ReactComponent as IntegrationColorIcon } from '../../assets/images/integrationIconColor.svg';
-import { ReactComponent as OverviewActiveIcon } from '../../assets/images/overviewIconActive.svg';
-import { ReactComponent as StationsActiveIcon } from '../../assets/images/stationsIconActive.svg';
-import { compareVersions, isCloud, showUpgradePlan } from '../../services/valueConvertor';
-import { ReactComponent as FunctionsActiveIcon } from '../../assets/images/functionsIconActive.svg';
-import { ReactComponent as SchemaActiveIcon } from '../../assets/images/schemaIconActive.svg';
-import { ReactComponent as IntegrationIcon } from '../../assets/images/integrationIcon.svg';
+} from 'const/localStorageConsts';
+import { ReactComponent as IntegrationColorIcon } from 'assets/images/integrationIconColor.svg';
+import { ReactComponent as OverviewActiveIcon } from 'assets/images/overviewIconActive.svg';
+import { ReactComponent as StationsActiveIcon } from 'assets/images/stationsIconActive.svg';
+import { compareVersions, isCloud, showUpgradePlan } from 'services/valueConvertor';
+import { ReactComponent as FunctionsActiveIcon } from 'assets/images/functionsIconActive.svg';
+import { ReactComponent as SchemaActiveIcon } from 'assets/images/schemaIconActive.svg';
+import { ReactComponent as IntegrationIcon } from 'assets/images/integrationIcon.svg';
 import { HiUsers } from 'react-icons/hi';
-import { ReactComponent as FunctionsIcon } from '../../assets/images/functionsIcon.svg';
-import { ReactComponent as OverviewIcon } from '../../assets/images/overviewIcon.svg';
-import { ReactComponent as StationsIcon } from '../../assets/images/stationsIcon.svg';
-import { ReactComponent as SupportIcon } from '../../assets/images/supportIcon.svg';
-import { ReactComponent as SupportColorIcon } from '../../assets/images/supportColorIcon.svg';
-import { ReactComponent as NewStationIcon } from '../../assets/images/newStationIcon.svg';
-import { ReactComponent as NewSchemaIcon } from '../../assets/images/newSchemaIcon.svg';
-import { ReactComponent as NewUserIcon } from '../../assets/images/newUserIcon.svg';
-import { ReactComponent as NewIntegrationIcon } from '../../assets/images/newIntegrationIcon.svg';
+import { ReactComponent as FunctionsIcon } from 'assets/images/functionsIcon.svg';
+import { ReactComponent as OverviewIcon } from 'assets/images/overviewIcon.svg';
+import { ReactComponent as StationsIcon } from 'assets/images/stationsIcon.svg';
+import { ReactComponent as SupportIcon } from 'assets/images/supportIcon.svg';
+import { ReactComponent as SupportColorIcon } from 'assets/images/supportColorIcon.svg';
+import { ReactComponent as NewStationIcon } from 'assets/images/newStationIcon.svg';
+import { ReactComponent as NewSchemaIcon } from 'assets/images/newSchemaIcon.svg';
+import { ReactComponent as NewUserIcon } from 'assets/images/newUserIcon.svg';
+import { ReactComponent as NewIntegrationIcon } from 'assets/images/newIntegrationIcon.svg';
 import { BsHouseHeartFill } from 'react-icons/bs';
-import { ReactComponent as EditIcon } from '../../assets/images/editIcon.svg';
-import { ReactComponent as QuickActionBtn } from '../../assets/images/quickActionBtn.svg';
-import { ReactComponent as AddUserIcon } from '../../assets/images/addUserIcon.svg';
-import { GithubRequest } from '../../services/githubRequests';
-import { ReactComponent as LogsActiveIcon } from '../../assets/images/logsActive.svg';
-import { ReactComponent as SchemaIcon } from '../../assets/images/schemaIcon.svg';
-import { LATEST_RELEASE_URL } from '../../config';
-import { ReactComponent as LogsIcon } from '../../assets/images/logsIcon.svg';
+import { ReactComponent as EditIcon } from 'assets/images/editIcon.svg';
+import { ReactComponent as QuickActionBtn } from 'assets/images/quickActionBtn.svg';
+import { ReactComponent as AddUserIcon } from 'assets/images/addUserIcon.svg';
+import { GithubRequest } from 'services/githubRequests';
+import { ReactComponent as LogsActiveIcon } from 'assets/images/logsActive.svg';
+import { ReactComponent as SchemaIcon } from 'assets/images/schemaIcon.svg';
+import { LATEST_RELEASE_URL } from 'config';
+import { ReactComponent as LogsIcon } from 'assets/images/logsIcon.svg';
 import { FaArrowCircleUp } from 'react-icons/fa';
-import { ApiEndpoints } from '../../const/apiEndpoints';
-import { httpRequest } from '../../services/http';
-import Logo from '../../assets/images/logo.svg';
-import AuthService from '../../services/auth';
-import { sendTrace, useGetAllowedActions } from '../../services/genericServices';
-import { Context } from '../../hooks/store';
-import pathDomains from '../../router';
+import { ApiEndpoints } from 'const/apiEndpoints';
+import { httpRequest } from 'services/http';
+import Logo from 'assets/images/logo.svg';
+import AuthService from 'services/auth';
+import { sendTrace, useGetAllowedActions } from 'services/genericServices';
+import { Context } from 'hooks/store';
+import pathDomains from 'router';
 import Spinner from '../spinner';
 import Support from './support';
-import LearnMore from '../learnMore';
-import GetStarted from '../getStartedModal';
-import Modal from '../modal';
-import CreateStationForm from '../createStationForm';
-import { ReactComponent as StationIcon } from '../../assets/images/stationIcon.svg';
-import CreateUserDetails from '../../domain/users/createUserDetails';
-import UpgradePlans from '../upgradePlans';
+import LearnMore from 'components/learnMore';
+import GetStarted from 'components/getStartedModal';
+import Modal from 'components/modal';
+import CreateStationForm from 'components/createStationForm';
+import { ReactComponent as StationIcon } from 'assets/images/stationIcon.svg';
+import CreateUserDetails from 'domain/users/createUserDetails';
+import UpgradePlans from 'components/upgradePlans';
 import { FaBook, FaDiscord } from 'react-icons/fa';
 import { BiEnvelope } from 'react-icons/bi';
 
@@ -111,7 +111,7 @@ function SideBar() {
     const createStationRef = useRef(null);
     const createUserRef = useRef(null);
 
-    const [avatarUrl, SetAvatarUrl] = useState(require('../../assets/images/bots/avatar1.svg'));
+    const [avatarUrl, SetAvatarUrl] = useState(require('assets/images/bots/avatar1.svg'));
     const [popoverOpenSetting, setPopoverOpenSetting] = useState(false);
     const [popoverOpenSupport, setPopoverOpenSupport] = useState(false);
     const [popoverOpenSupportContextMenu, setPopoverOpenSupportContextMenu] = useState(false);
@@ -165,7 +165,7 @@ function SideBar() {
     }, [state]);
 
     const setAvatarImage = (avatarId) => {
-        SetAvatarUrl(require(`../../assets/images/bots/avatar${avatarId}.svg`));
+        SetAvatarUrl(require(`assets/images/bots/avatar${avatarId}.svg`));
     };
 
     const handleLogout = async () => {
